@@ -1,0 +1,5 @@
+# main model dtype
+dtype: 'bfloat16'
+output_attentions_full_precision: false
+
+dtype_conf_name: 'halfAttn'

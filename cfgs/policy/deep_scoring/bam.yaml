@@ -1,0 +1,9 @@
+defaults:
+  - attn
+  - _self_ 
+
+mult: true
+mult_nonlinearity:
+# --
+
+scoring_mp_log_name: bam

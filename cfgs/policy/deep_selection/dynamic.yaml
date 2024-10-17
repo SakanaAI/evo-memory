@@ -1,0 +1,16 @@
+selection_criteria: ${dynamic_selection}
+
+dynamic_selection:
+  _target_: memory_policy.DynamicSelection
+  per_layer: ${per_layer}
+  per_head: ${per_head}
+  shared: ${selection_shared}
+  cache_size: ${cache_size}
+  dynamic_thresh: ${dynamic_thresh}
+
+selection_shared: true
+cache_size:
+# 1/2048
+dynamic_thresh: 0.00048828125
+
+selection_mp_log_name: dynamic-${cache_size}cs

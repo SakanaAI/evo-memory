@@ -1,0 +1,10 @@
+# TODO
+
+defaults:
+  - base_sampler
+  - _self_
+
+tasks: ["lb/passage_retrieval_en"]
+metrics: 'perf'
+
+tasks_log_name: passage-retrieval-en

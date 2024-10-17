@@ -1,0 +1,40 @@
+defaults:
+  - _self_
+  - trainer@_global_: default
+  - model@_global_: hf_evaluator
+  - typing@_global_: default
+  - policy@_global_: deep
+  - auxiliary_loss@_global_: none
+  - evolution@_global_: cma_es
+  - task@_global_: passage_retrieval_en
+  - run@_global_: default
+
+wandb_config:
+  _target_: memory_trainer.WandbConfig
+  wandb_log: ${wandb_log}
+  wandb_project: ${wandb_project}
+  wandb_run_name: ${wandb_run_name}
+  wandb_group_name: ${wandb_group_name}
+
+
+out_folder: ./exp_local
+out_dir: '${out_folder}/${wandb_project}/${wandb_group_name}/${wandb_run_name}/${seed}'
+
+# wandb logging
+wandb_log: true # enabled by default
+wandb_project: memory_evolution_hf
+wandb_run_name: default_configs_test
+wandb_group_name: tests
+
+# system
+device: 'cuda'
+seed: 1337
+deterministic_behavior: false
+
+# ddp settings
+backend: 'nccl' # 'nccl', 'gloo', etc.
+ddp_timeout_limit: '0:6:0' # days:hours:minutes
+
+hydra:
+  run:
+    dir: ${out_dir}/

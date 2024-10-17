@@ -1,0 +1,9 @@
+selection_criteria: ${topk_selection}
+
+topk_selection:
+  _target_: memory_policy.TopKSelection
+  cache_size: ${cache_size}
+
+cache_size: 8192
+
+selection_mp_log_name: topk-${cache_size}cs

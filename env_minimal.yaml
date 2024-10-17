@@ -1,0 +1,36 @@
+name: th2
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - pytorch-cuda=12.1
+  - torchvision
+  - torchaudio
+  - ipykernel
+  - matplotlib
+  - ipywidgets
+  - pip:
+    - vllm
+    - numpy 
+    - transformers==4.41.2
+    - accelerate
+    - datasets 
+    - tiktoken 
+    - wandb 
+    - tqdm
+    - hydra-core
+    - crfm-helm
+    - lm-eval==0.4.2
+    - fugashi==1.3.2
+    - ftfy
+    - bitsandbytes
+    - rouge
+    - jieba
+    - fuzzywuzzy
+    - einops
+    - scipy==1.13.0
+    - seaborn

@@ -1,0 +1,35 @@
+defaults:
+  - attn_spec_base
+  - norm_base
+  - _self_
+
+token_embedding: 
+  _target_: memory_policy.RecencyEmbeddingWrapper
+  token_embedding: ${attn_spectrogram}
+  recency_embedding: ${recency_deep_embedding}
+  start_recency_from: ${start_recency_from}
+  wrapper_output_dim: ${wrapper_output_dim}
+  processing_layers: ${processing_layers}
+  joining_strategy: ${joining_strategy}
+  output_params: ${wrapper_output_params}
+
+ 
+recency_deep_embedding:
+  _target_: memory_policy.PositionalEmbedding
+  max_position_id: ${max_position_id}
+  embed_dim: ${recency_embed_dim}
+  max_freq: ${recency_max_freq}
+
+wrapper_output_dim:
+processing_layers: 0
+joining_strategy: 'append'
+wrapper_output_params:
+
+recency_embedding_name: ${joining_strategy}RecAbsPoc${recency_embed_dim}D
+
+# must be even
+recency_embed_dim: 8
+recency_max_freq: 50000
+start_recency_from: 1 # NOTE: 1 for legacy compatibility purposes
+
+embedding_mp_log_name: attn-spec-norm

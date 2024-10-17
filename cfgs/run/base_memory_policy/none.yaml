@@ -1,0 +1,25 @@
+# @package _global_
+defaults:
+  - override /model/wrapped_llm@_global_: llama3-8b-rope-x4NTK
+  - override /task@_global_: passage_retrieval_en
+  - override /evolution@_global_: dummy
+  - override /policy@_global_: none
+  - override /typing@_global_: half_attn
+  - override /auxiliary_loss@_global_: none
+  - _self_
+
+run_name_suffix: ''
+
+wandb_project: memory_evolution_hf
+
+wandb_run_name: ${tasks_log_name}-${evolution_algorithm_log_name}-shared-${pop_size}pop-${samples_batch_size}qs-${memory_policy_fixed_delay}fixDel-${run_name_suffix}
+wandb_group_name: ${llm_log_name}/${mp_log_name}
+
+add_bos_token: true # to match ref. scores setting
+score_normalization_reference: 'lb_reference_scores/per_request/llama3-8b-32k-x2NTK2alpha-v2.json'
+
+batch_size: 1
+
+max_new_tokens: 128
+
+cache_size: ${max_position_id} # do not discard any tokens

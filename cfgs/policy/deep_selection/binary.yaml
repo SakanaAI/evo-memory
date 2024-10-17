@@ -1,0 +1,21 @@
+selection_criteria: ${dynamic_selection}
+
+dynamic_selection:
+  _target_: memory_policy.BinarySelection
+  per_layer: ${per_layer}
+  per_head: ${per_head}
+  shared: ${selection_shared}
+  cache_size: ${cache_size}
+  is_probabilistic: ${is_probabilistic}
+  temp: ${temp}
+  learned_temp: ${learned_temp}
+
+
+is_probabilistic: false
+temp: 1.0
+learned_temp: false
+
+selection_shared: true
+cache_size:
+
+selection_mp_log_name: binary-${cache_size}cs

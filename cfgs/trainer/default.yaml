@@ -1,0 +1,87 @@
+defaults:
+  - _self_
+  
+trainer:
+  _target_: memory_trainer.MemoryTrainer
+  trainer_config: ${trainer_config}
+  wandb_config: ${wandb_config}
+  device: ${device}
+  scratch: ${scratch}
+
+trainer_config:
+  _target_: memory_trainer.TrainerConfig
+  out_dir: ${out_dir}
+  max_iters: ${max_iters}
+  task_batch_size: ${task_batch_size}
+  samples_batch_size: ${samples_batch_size}
+  eval_samples_batch_size: ${eval_samples_batch_size}
+  allow_distributed_eval: ${allow_distributed_eval}
+
+  pop_accumulation_steps: ${pop_accumulation_steps}
+
+  score_aggregation: ${score_aggregation}
+  score_normalization_reference: ${score_normalization_reference}
+
+  synchronized_buffers_aggregation: ${synchronized_buffers_aggregation}
+  synchronized_buffers_freeze_after: ${synchronized_buffers_freeze_after}
+
+  prefetch_task_tensors: ${prefetch_task_tensors}
+  override_prefetched_tensors: ${override_prefetched_tensors}
+
+  eval_interval: ${eval_interval}
+  early_stop_patience: ${early_stop_patience}
+  log_interval: ${log_interval}
+  eval_iters: ${eval_iters}
+  eval_only: ${eval_only}
+  eval_candidate_samples: ${eval_candidate_samples}
+  eval_candidate_temp: ${eval_candidate_temp}
+  record_advanced_eval_stats: ${record_advanced_eval_stats}
+  store_eval_results_locally: ${store_eval_results_locally}
+  record_per_task_eval_stats: ${record_per_task_eval_stats}
+
+  always_save_checkpoint: ${always_save_checkpoint}
+  keep_past_epoch_checkpoints_every: ${keep_past_epoch_checkpoints_every}
+  use_amp: ${use_amp}
+  init_from: ${init_from}
+  dtype: ${dtype}
+  
+# main trainer cfgs
+max_iters: 10000
+task_batch_size:
+samples_batch_size: 16
+eval_samples_batch_size: 128
+allow_distributed_eval: false
+
+pop_accumulation_steps: 1
+score_aggregation: 'mean'
+score_normalization_reference:
+
+# use 'mean' or 'best' population member to aggregate sync. buffers
+synchronized_buffers_aggregation: 'mean'
+synchronized_buffers_freeze_after:
+
+# prefetching (only implemented for generation tasks)
+prefetch_task_tensors: false
+override_prefetched_tensors: false
+
+# logging
+eval_interval: 100
+early_stop_patience: -1
+log_interval: 50
+eval_iters: 1
+eval_only: false
+eval_candidate_samples:
+eval_candidate_temp:
+
+always_save_checkpoint: true
+keep_past_epoch_checkpoints_every:
+scratch: true
+record_advanced_eval_stats: true
+store_eval_results_locally: true
+record_per_task_eval_stats: false
+
+# precision
+use_amp: false
+init_from:
+dtype: 'bfloat16'
+

@@ -1,0 +1,36 @@
+
+# TODO
+defaults:
+  - _self_
+  - trainer@_global_: default
+  - model@_global_: hf_evaluator
+  - policy@_global_: deep
+  - auxiliary_loss@_global_: none
+  - evolution@_global_: cma_es
+  - task@_global_: passage_retrieval_en
+  - run@_global_: default
+
+params_to_sweep:
+  memory_policy:
+    cache_size: [256, 512, 1024]
+
+out_folder: ./exp_local
+out_dir: '${out_folder}/${wandb_project}/${wandb_group_name}/${wandb_run_name}/${seed}'
+
+# wandb logging
+wandb_log: true # enabled by default
+wandb_project: memory_evolution_hf
+wandb_run_name: default_configs_test
+wandb_group_name: tests
+
+
+# system
+backend: 'nccl' # 'nccl', 'gloo', etc.
+device: 'cuda'
+seed: 1337
+deterministic_behavior: false
+
+
+hydra:
+  run:
+    dir: ${out_dir}/

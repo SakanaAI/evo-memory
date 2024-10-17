@@ -1,0 +1,16 @@
+emb_online_output_normalization: true
+emb_update_norm_during_training: false
+emb_update_norm_during_eval: true
+
+synchronized_buffers_freeze_after: 1
+
+embedding_output_params:
+  _target_: memory_policy.ComponentOutputParams
+  requires_recomputation: ${embedding_requires_recomputation}
+  reduction_mode: ${embedding_reduction_mode}
+  ema_params: ${embedding_ema_params}
+  output_past_non_reduced_history: ${embedding_output_past_non_reduced_history}
+  max_non_reduced_history_len: ${embedding_max_non_reduced_history_len}
+  online_output_normalization: ${emb_online_output_normalization}
+  update_norm_during_training: ${emb_update_norm_during_training}
+  update_norm_during_eval: ${emb_update_norm_during_eval}

@@ -1,0 +1,96 @@
+scoring_network: ${generalized_scoring_net}
+
+generalized_scoring_net:
+  _target_: memory_policy.GeneralizedScoring
+  per_layer: ${per_layer}
+  per_head: ${per_head}
+  shared: ${scoring_shared}
+  output_params: ${scoring_output_params}
+  initializer: ${scoring_initializer}
+  stateless_modules_list: ${stateless_modules_list}
+  residual: ${residual}
+  mult: ${mult}
+  mult_nonlinearity: ${mult_nonlinearity}
+  
+mlp_layer:
+  _target_: stateless_parallel_modules.StatelessGeneralizedMLP
+  input_features: ${scoring_attn_output_dim}
+  hidden_features: ${scoring_mlp_hidden_features}
+  hidden_depth: ${scoring_mlp_hidden_depth}
+  output_features: ${scoring_mlp_output_features}
+  bias: ${scoring_mlp_bias}
+  non_linearity: ${scoring_mlp_non_linearity}
+  residual: ${scoring_mlp_residual}
+  residual_first: ${scoring_mlp_residual_first}
+
+scoring_mlp_hidden_features:
+scoring_mlp_hidden_depth: 1
+scoring_mlp_output_features: 1
+scoring_mlp_bias: true
+scoring_mlp_non_linearity: relu
+scoring_mlp_residual: true
+scoring_mlp_residual_first: false
+  
+
+attention_layer:
+  _target_: stateless_parallel_modules.StatelessAttention
+  attention_params: ${attention_params}
+
+attention_params:
+  _target_: stateless_parallel_modules.StatelessAttentionParams
+  input_dim:
+  hidden_dim: ${scoring_attn_hidden_dim}
+  output_dim: ${scoring_attn_output_dim}
+  num_heads: ${scoring_attn_num_heads}
+  bias: ${scoring_attn_bias}
+  max_position_id: ${max_position_id}
+  use_rope: ${scoring_attn_use_rope}
+  rope_theta: ${scoring_attn_rope_theta}
+  masking_strategy: ${scoring_attn_masking_strategy}
+
+scoring_attn_hidden_dim: 32
+scoring_attn_output_dim:
+scoring_attn_num_heads: 4
+scoring_attn_bias: false
+scoring_attn_use_rope: false
+scoring_attn_rope_theta: 10000
+scoring_attn_masking_strategy:
+
+scoring_output_params:
+  _target_: memory_policy.ComponentOutputParams
+  requires_recomputation: ${scoring_requires_recomputation}
+  reduction_mode: ${scoring_reduction_mode}
+  ema_params: ${scoring_ema_params}
+  output_past_non_reduced_history: ${scoring_output_past_non_reduced_history}
+  max_non_reduced_history_len: ${scoring_max_non_reduced_history_len}
+
+scoring_ema_params:
+  _target_: memory_policy.EMAParams
+  coeff: ${scoring_ema_coeff}
+  learned: ${scoring_reduction_learned}
+  reduction_stride: ${hop_length}
+
+# MLP params
+scoring_shared: true
+# Output params.
+scoring_requires_recomputation: true
+scoring_reduction_mode: ema
+# Ema params.
+scoring_ema_coeff: 0.975
+scoring_reduction_learned: false
+# --
+scoring_output_past_non_reduced_history: false
+scoring_max_non_reduced_history_len:
+# --
+scoring_initializer: 0
+stateless_modules_list: 
+  - ${attention_layer}
+  - ${mlp_layer}
+residual: true
+mult: false
+mult_nonlinearity:
+
+# --
+
+
+scoring_mp_log_name: bam-no-mult

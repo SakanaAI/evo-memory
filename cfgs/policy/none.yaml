@@ -1,0 +1,8 @@
+memory_policy:
+  _target_: memory_policy.Recency
+  cache_size: ${cache_size}
+
+cache_size: null
+
+
+mp_log_name: dummy

@@ -1,0 +1,28 @@
+defaults:
+  - _self_
+
+
+pretrained_llm:
+  _target_: utils_hydra.AutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: ${pretrained_llm_name}
+
+tokenizer:
+  _target_: utils_hydra.AutoTokenizer.from_pretrained
+  pretrained_model_name_or_path: ${pretrained_llm_name}
+
+pretrained_llm_name: meta-llama/Meta-Llama-3-8B
+
+
+memory_model:
+  _target_: memory_llms.llama.WrappedLlamaForCausalLM
+  model: ${pretrained_llm}
+  memory_policy: ${memory_policy}  
+  max_new_tokens: ${max_new_tokens}
+  memory_policy_fixed_delay: ${memory_policy_fixed_delay}
+  output_attentions_full_precision: ${output_attentions_full_precision}
+
+# needs to specify only for non memory_models
+max_new_tokens:
+max_position_id: 2048
+max_conditioning_length: ${max_position_id}
+memory_policy_fixed_delay:

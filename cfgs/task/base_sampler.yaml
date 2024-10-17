@@ -1,0 +1,14 @@
+task_sampler:
+  _target_: task_sampler.TaskSampler
+  tasks: ${tasks}
+  metrics: ${metrics}
+  training_tasks_subset: ${training_tasks_subset}
+  test_tasks_subset: ${test_tasks_subset}
+
+
+tasks: ['sciq']
+metrics: ['acc']
+training_tasks_subset:
+test_tasks_subset:
+
+tasks_log_name:

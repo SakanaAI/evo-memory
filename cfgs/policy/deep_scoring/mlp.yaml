@@ -1,0 +1,57 @@
+scoring_network: ${mlp_scoring}
+
+mlp_scoring:
+  _target_: memory_policy.MLPScoring
+  per_layer: ${per_layer}
+  per_head: ${per_head}
+  shared: ${scoring_shared}
+  output_params: ${scoring_output_params}
+  hidden_features: ${hidden_features}
+  hidden_depth: ${hidden_depth}
+  bias: ${scoring_mlp_bias}
+  non_linearity: ${non_linearity}
+  initializer: ${scoring_initializer}
+  residual: ${residual}
+  residual_first: ${residual_first}
+  
+
+scoring_output_params:
+  _target_: memory_policy.ComponentOutputParams
+  requires_recomputation: ${scoring_requires_recomputation}
+  reduction_mode: ${scoring_reduction_mode}
+  ema_params: ${scoring_ema_params}
+  output_past_non_reduced_history: ${scoring_output_past_non_reduced_history}
+  max_non_reduced_history_len: ${scoring_max_non_reduced_history_len}
+
+scoring_ema_params:
+  _target_: memory_policy.EMAParams
+  coeff: ${scoring_ema_coeff}
+  learned: ${scoring_reduction_learned}
+  reduction_stride: ${hop_length}
+
+# MLP params
+scoring_shared: true
+# Output params.
+scoring_requires_recomputation: true
+scoring_reduction_mode: ema
+# Ema params.
+scoring_ema_coeff: 0.99
+scoring_reduction_learned: false
+# --
+scoring_output_past_non_reduced_history: false
+scoring_max_non_reduced_history_len:
+# --
+hidden_features:
+hidden_depth: 1
+scoring_mlp_bias: false
+non_linearity: relu
+scoring_initializer: 
+  _target_: memory_policy.make_scaled_one_hot_init
+  idxs_to_scale: {}
+  idxs_to_ones: []
+residual: true
+residual_first: true
+# --
+
+
+scoring_mp_log_name: mlp

@@ -1,0 +1,29 @@
+# TODO
+
+defaults:
+  - base_sampler
+  - _self_
+
+tasks:
+  - "lb/narrativeqa"
+  - "lb/qasper"
+  - "lb/multifieldqa_en"
+  - "lb/multifieldqa_zh"
+  - "lb/hotpotqa"
+  - "lb/2wikimqa"
+  - "lb/musique"
+  - "lb/dureader"
+  - "lb/gov_report"
+  - "lb/qmsum"
+  - "lb/multi_news"
+  - "lb/vcsum"
+  - "lb/trec"
+  - "lb/triviaqa"
+  - "lb/samsum"
+  - "lb/lsht"
+  - "lb/passage_count"
+  - "lb/passage_retrieval_en"
+  - "lb/passage_retrieval_zh"
+  - "lb/lcc"
+  - "lb/repobench-p"
+metrics: 'perf'

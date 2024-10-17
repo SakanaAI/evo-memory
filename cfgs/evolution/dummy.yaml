@@ -1,0 +1,15 @@
+evolution_algorithm:
+  _target_: memory_evolution.base.DummyEvolution
+  pop_size: ${pop_size}
+  param_size: ${param_size}
+  param_clip: ${param_clip}
+  score_processing: ${score_processing}
+
+pop_size: 1
+param_size:
+param_clip:
+score_processing:
+
+evolution_algorithm_name: dummy
+
+evolution_algorithm_log_name: ${evolution_algorithm_name}-p${pop_size}

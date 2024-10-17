@@ -1,0 +1,28 @@
+defaults:
+  - base
+  - _self_ 
+
+pretrained_llm_name: meta-llama/Meta-Llama-3-8B
+
+memory_model:
+  _target_: memory_llms.llama.WrappedLlamaForCausalLM
+  model: ${pretrained_llm}
+  memory_policy: ${memory_policy}  
+  max_new_tokens: ${max_new_tokens}
+
+pretrained_llm:
+  _target_: utils_hydra.AutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: ${pretrained_llm_name}
+  rope_scaling: ${rope_scaling}
+
+max_new_tokens:
+max_position_id: 32768
+
+rope_scaling:
+  type: dynamic
+  override: 'ntk'
+  factor: 4
+  alpha: 2
+
+
+llm_log_name: Meta-Llama-3-8B-x4NTK

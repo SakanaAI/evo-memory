@@ -1,0 +1,44 @@
+evolution_algorithm:
+  _target_: memory_evolution.cma_es.CMA_ES
+  pop_size: ${pop_size}
+  param_size: ${param_size}
+  param_clip: ${param_clip}
+  clip_param_min: ${clip_param_min}
+  clip_param_max: ${clip_param_max}
+  score_processing: ${score_processing}
+  elite_ratio: ${elite_ratio}
+  c_1: ${c_1}
+  c_mu: ${c_mu}
+  c_sigma: ${c_sigma}
+  d_sigma: ${d_sigma}
+  c_c: ${c_c}
+  c_m: ${c_m}
+  init_sigma: ${init_sigma}
+  init_param_range: ${init_param_range}
+  prefer_mean_to_best: ${prefer_mean_to_best}
+
+
+pop_size: 16
+param_size:
+param_clip:
+clip_param_min:
+clip_param_max:
+# cma-es has own custom score processinhg
+score_processing:
+elite_ratio: 0.5
+c_1:
+c_mu:
+c_sigma:
+d_sigma:
+c_c:
+
+
+c_m: 1.0
+init_sigma: 0.065
+init_param_range:
+
+prefer_mean_to_best: false
+
+evolution_algorithm_name: cma-es
+
+evolution_algorithm_log_name: ${evolution_algorithm_name}-p${pop_size}-rMean${prefer_mean_to_best}

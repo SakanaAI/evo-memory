@@ -1,0 +1,12 @@
+# TODO
+
+defaults:
+  - base_sampler
+  - _self_
+
+tasks:
+  - "choubun/wiki_qa"
+  - "choubun/edinet_qa"
+  - "choubun/corp_sec_qa"
+  - "choubun/corp_sec_sum"
+metrics: 'perf'

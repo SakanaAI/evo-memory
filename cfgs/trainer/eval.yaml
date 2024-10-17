@@ -1,0 +1,15 @@
+defaults:
+  - default
+  - _self_
+
+max_iters: 0
+eval_only: true
+always_save_checkpoint: true
+scratch: false
+record_advanced_eval_stats: true
+eval_samples_batch_size:
+allow_distributed_eval: true
+
+score_aggregation: 'mean'
+score_normalization_reference:
+store_eval_results_locally: true

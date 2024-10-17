@@ -1,0 +1,22 @@
+defaults:
+  - _self_
+  - deep_embedding@_global_: joint_recency_attn_spec
+  - deep_scoring@_global_: mlp
+  - deep_selection@_global_: dynamic
+
+
+memory_policy:
+  _target_: memory_policy.DeepMP
+  pop_size: ${pop_size}
+  per_head: ${per_head}
+  per_layer: ${per_layer}
+  token_embedding: ${token_embedding}
+  scoring_network: ${scoring_network}
+  selection_criteria: ${selection_criteria}
+  lazy_param_num: ${lazy_param_num}
+
+per_head: false
+per_layer: true
+lazy_param_num: false
+
+mp_log_name: NAMM/${embedding_mp_log_name}/${scoring_mp_log_name}/${selection_mp_log_name}

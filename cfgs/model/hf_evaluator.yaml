@@ -1,0 +1,45 @@
+defaults:
+  - _self_
+  - wrapped_llm@_global_: pythia160m
+
+memory_evaluator:
+  _target_: memory_evaluator.MemoryHFEvaluator
+  model: ${pretrained_llm}
+  tokenizer: ${tokenizer}
+
+  evaluation_ctx_steps: ${evaluation_ctx_steps}
+  add_bos_token: ${add_bos_token}
+  
+  eval_max_batch_size: ${eval_max_batch_size}
+  memory_batch_size: ${memory_batch_size}
+
+  batch_size: ${batch_size}
+  max_conditioning_length: ${max_conditioning_length}
+
+  max_memory_length: ${max_memory_length}
+  max_gen_tokens: ${max_gen_tokens}
+  full_context_gen: ${full_context_gen}
+
+  per_timestep_loglikelihood: ${per_timestep_loglikelihood}
+  force_clear_cache: ${force_clear_cache}
+
+  device: ${device}
+
+  log_misc: ${log_misc}
+
+evaluation_ctx_steps: 1 # default, unused
+add_bos_token: true
+
+eval_max_batch_size: 256
+memory_batch_size: false 
+
+batch_size: "auto"
+
+max_memory_length: 2048
+max_gen_tokens: 512 # from the HFLM class
+full_context_gen: true
+
+per_timestep_loglikelihood: true
+force_clear_cache: true
+
+log_misc: false
