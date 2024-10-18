@@ -5,8 +5,9 @@
 </h1>
 
 <p align="center">
-  📚 <a href="https://arxiv.org/abs/2410.X">[Paper]</a> |
+  📄 <a href="http://arxiv.org/abs/2410.13166">[Paper]</a> |
   🤗 <a href="https://huggingface.co/SakanaAI">[Hugging Face]</a>
+  📁 <a href="https://huggingface.co/datasets/SakanaAI/ChouBun">[Dataset]</a>
 </p>
 
 ## Installation
@@ -87,7 +88,13 @@ To cite our work, you can use the following:
 
 ```
 @article{sakana2024memory,
-  title={An Evolved Universal Transformer Memory},
+title={An Evolved Universal Transformer Memory}, 
+       author={Edoardo Cetin and Qi Sun and Tianyu Zhao and Yujin Tang},
+       year={2024},
+       eprint={2410.13166},
+       archivePrefix={arXiv},
+       primaryClass={cs.LG},
+       url={https://arxiv.org/abs/2410.13166},
 }
 ```
 
